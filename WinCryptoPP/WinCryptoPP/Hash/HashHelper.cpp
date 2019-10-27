@@ -1,14 +1,6 @@
 #include "HashHelper.h"
 
-HashHelper::HashHelper()
-{
-}
-
-HashHelper::~HashHelper()
-{
-}
-
-std::string HashHelper::CalMD5FromFile(char* pszFileName)
+std::string CalMD5ByFile(char* pszFileName)
 {
 	std::string value;
 	MD5 md5;
@@ -16,7 +8,7 @@ std::string HashHelper::CalMD5FromFile(char* pszFileName)
 	return value;
 }
 
-std::string HashHelper::CalMD5FromMem(PBYTE pData, DWORD dwDataSize)
+std::string CalMD5ByMem(PBYTE pData, DWORD dwDataSize)
 {
 	std::string value;
 	MD5 md5;
@@ -24,7 +16,7 @@ std::string HashHelper::CalMD5FromMem(PBYTE pData, DWORD dwDataSize)
 	return value;
 }
 
-std::string HashHelper::CalSha1FromFile(char* pszFileName)
+std::string CalSha1ByFile(char* pszFileName)
 {
 	std::string value;
 	SHA1 sha1;
@@ -32,7 +24,7 @@ std::string HashHelper::CalSha1FromFile(char* pszFileName)
 	return value;
 }
 
-std::string HashHelper::CalSha1FromMem(PBYTE pData, DWORD dwDataSize)
+std::string CalSha1ByMem(PBYTE pData, DWORD dwDataSize)
 {
 	std::string value;
 	SHA1 sha1;
@@ -40,7 +32,7 @@ std::string HashHelper::CalSha1FromMem(PBYTE pData, DWORD dwDataSize)
 	return value;
 }
 
-std::string HashHelper::CalSha256FromFile(char* pszFileName)
+std::string CalSha256ByFile(char* pszFileName)
 {
 	std::string value;
 	SHA256 sha256;
@@ -48,7 +40,7 @@ std::string HashHelper::CalSha256FromFile(char* pszFileName)
 	return value;
 }
 
-std::string HashHelper::CalSha256FromMem(PBYTE pData, DWORD dwDataSize)
+std::string CalSha256ByMem(PBYTE pData, DWORD dwDataSize)
 {
 	std::string value;
 	SHA256 sha256;

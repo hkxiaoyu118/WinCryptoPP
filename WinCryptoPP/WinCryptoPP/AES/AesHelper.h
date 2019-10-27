@@ -4,6 +4,11 @@
 
 using namespace CryptoPP;
 
+/*
+	简单的AES加密算法
+	使用nopadding进行填充
+	解密没有去掉nopadding
+*/
 class AesHelper
 {
 public:

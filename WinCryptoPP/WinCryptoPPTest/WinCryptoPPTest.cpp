@@ -5,9 +5,15 @@
 #include <stdio.h>
 #include "../WinCryptoPP/Hash/HashHelper.h"
 #include "../WinCryptoPP/AES/AesHelper.h"
+#include "../WinCryptoPP/RSA/RSAHelper.h"
 
 #pragma comment(lib, "..\\WinCryptoPP\\Libs\\lib\\Debug\\cryptlib.lib")
 #pragma comment(lib, "..\\Debug\\WinCryptoPP.lib")
+
+using namespace std;
+
+char g_szPubKey[] = "30819D300D06092A864886F70D010101050003818B0030818702818100F0CE882D7CCB990323A6DB1B775EBE8F2910BFE75B4B580EF8C5089BB25FEDEEABCE2BBD2AC64A138E47F96A6C39152FE98067C0B4F5DC28F8D9394325ADB12A90A9598FF7A2A7211DEF974FC8A005D0CBCDE059FB8F7F9D214C5BAC2532CEB8EC4041AEAB19E80B8C4020F4A50102F9E738647E2384EA2FCD30C3681559CF6F020111";
+char g_szPrivKey[] = "30820275020100300D06092A864886F70D01010105000482025F3082025B02010002818100F0CE882D7CCB990323A6DB1B775EBE8F2910BFE75B4B580EF8C5089BB25FEDEEABCE2BBD2AC64A138E47F96A6C39152FE98067C0B4F5DC28F8D9394325ADB12A90A9598FF7A2A7211DEF974FC8A005D0CBCDE059FB8F7F9D214C5BAC2532CEB8EC4041AEAB19E80B8C4020F4A50102F9E738647E2384EA2FCD30C3681559CF6F020111028180210D49E8203005F15F3F0F03C5170B18AB4892CF70EC39434F52426FB91C39C162E0100AE7C0DCFDAA1DF50E9B67351AA7942251AA68051EB8BE7145739A599220030CF5E35ED4DEA41DD6E955722AE46153339FE7417BD00ADF53B368EAB6E71FAE0F7F394A34C91612B0F11AEC5525DB84DD982E6BF10CE74F177FA51ADC51024100F80296900AF134CCC5AC12C58D741C735F5EE9CBDFB8C1B1EB039BF078E37B09322074193B7B0AE5A60B544DDDB9159294E91744404A2C7CDF96287F5483D691024100F8908925066C3ED9AC8EAFE63A59D56FCBEC354A3DD513489DEDA70E42338CD2AEBDEEF685148123B31A55CA27B2A59CA53E2352DA284F30585A5D6B571245FF02410091E367A0066FC4B4B083565616F901AD4728C5C3384E900E4E021F7E653A849BFF5E6269320C24871661046A09F4670AEE2EC264620D8394BFC1BD781398D891024057BA8AC1C608162EB55F896050D46972C0717C38520EF7BF46CC5914175D7CFF107F4547F2BBF157E4DC1E47594E1C55677F57C2E395C19897A76C44009D09A5024100BBB92D3E8776B52FA20303E39FE8AE862637BB75880D82C6580C3217445C4A95BFB6E94120AD62AADC313418A350FF21B0ED861848626CC0F55936F750B44FC4";
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -21,12 +27,45 @@ int _tmain(int argc, _TCHAR* argv[])
 // 	std::string result3 = helper.CalSha256FromFile((char *)filePath.c_str());
 // 	printf("MD5:%s\n", result3.c_str());
 
-	AesHelper helper;
-	std::string text = "¹þ¹þ¹þ¹þ£¬Ëï·Ê·Êxxxxx";
-	std::string key = "qwertyuioplkjhgf";
-	std::string result1 = helper.AesEncrypt(text, key);
-	std::string result2 = helper.AesDecrypt(result1, key);
-	std::cout << result2 << std::endl;
+// 	AesHelper helper;
+// 	std::string text = "¹þ¹þ¹þ¹þ£¬Ëï·Ê·Êxxxxx";
+// 	std::string key = "qwertyuioplkjhgf";
+// 	std::string result1 = helper.AesEncrypt(text, key);
+// 	std::string result2 = helper.AesDecrypt(result1, key);
+// 	std::cout << result2 << std::endl;
+
+
+	char szPrivateFile[] = "privatefile";
+	char szPublicFile[] = "publicfile";
+	char szSeed[] = "DemonGanDemonGansdjlkfjsdlk";
+
+	char szOriginalString[] = "I am DemonGan";
+
+	/* ÃÜÔ¿ÔÚÎÄ¼þ·½Ê½ */
+	// Éú³ÉRSA¹«Ë½ÃÜÔ¿¶Ô
+	GenerateRSAKey(1024, szPrivateFile, szPublicFile, (BYTE*)szSeed, ::lstrlen(szSeed));
+	// RSA¹«Ô¿¼ÓÃÜ×Ö·û´®
+	string strEncryptString = RSAEncryptByFile(szOriginalString, szPublicFile, (BYTE*)szSeed, ::lstrlen(szSeed));
+	// RSAË½Ô¿½âÃÜ×Ö·û´®
+	string strDecryptString = RSADecryptByFile((char*)strEncryptString.c_str(), szPrivateFile);
+	// ÏÔÊ¾
+	printf("Ô­ÎÄ×Ö·û´®:\n[%d]%s\n", ::lstrlen(szOriginalString), szOriginalString);
+	printf("ÃÜÎÄ×Ö·û´®:\n[%d]%s\n", strEncryptString.length(), strEncryptString.c_str());
+	printf("½âÃÜÃ÷ÎÄ×Ö·û´®:\n[%d]%s\n", strDecryptString.length(), strDecryptString.c_str());
+
+	printf("\n\n");
+
+
+// 	/* ÃÜÔ¿ÔÚÄÚ´æ·½Ê½ */
+// 	// RSA¹«Ô¿¼ÓÃÜ×Ö·û´®
+// 	string strEncryptString_Mem = RSAEncryptByMem(szOriginalString, g_szPubKey, (BYTE*)szSeed, ::lstrlen(szSeed));
+// 	// RSAË½Ô¿½âÃÜ×Ö·û´®
+// 	string strDecryptString_Mem = RSADecryptByMem((char*)strEncryptString_Mem.c_str(), g_szPrivKey);
+// 	// ÏÔÊ¾
+// 	printf("Ô­ÎÄ×Ö·û´®:\n[%d]%s\n", ::lstrlen(szOriginalString), szOriginalString);
+// 	printf("ÃÜÎÄ×Ö·û´®:\n[%d]%s\n", strEncryptString_Mem.length(), strEncryptString_Mem.c_str());
+// 	printf("½âÃÜÃ÷ÎÄ×Ö·û´®:\n[%d]%s\n", strDecryptString_Mem.length(), strDecryptString_Mem.c_str());
+
 	system("pause");
 	return 0;
 }
