@@ -76,6 +76,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AES\AesCbcHelper.h" />
     <ClInclude Include="AES\AesEcbHelper.h" />
     <ClInclude Include="AES\AesHelper.h" />
     <ClInclude Include="Hash\HashHelper.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AES\AesCbcHelper.cpp" />
     <ClCompile Include="AES\AesEcbHelper.cpp" />
     <ClCompile Include="AES\AesHelper.cpp" />
     <ClCompile Include="Hash\HashHelper.cpp" />

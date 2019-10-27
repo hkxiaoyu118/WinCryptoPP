@@ -45,6 +45,9 @@
     <ClInclude Include="RSA\RSAHelper.h">
       <Filter>RSA</Filter>
     </ClInclude>
+    <ClInclude Include="AES\AesCbcHelper.h">
+      <Filter>AES</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="RSA\RSAHelper.cpp">
       <Filter>RSA</Filter>
+    </ClCompile>
+    <ClCompile Include="AES\AesCbcHelper.cpp">
+      <Filter>AES</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

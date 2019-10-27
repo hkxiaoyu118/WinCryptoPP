@@ -5,7 +5,9 @@
 #include <stdio.h>
 #include "../WinCryptoPP/Hash/HashHelper.h"
 #include "../WinCryptoPP/AES/AesHelper.h"
-#include "../WinCryptoPP/RSA/RSAHelper.h"
+#include "../WinCryptoPP/AES/AesEcbHelper.h"
+#include "../WinCryptoPP/AES/AesCbcHelper.h"
+/*#include "../WinCryptoPP/RSA/RSAHelper.h"*/
 
 #pragma comment(lib, "..\\WinCryptoPP\\Libs\\lib\\Debug\\cryptlib.lib")
 #pragma comment(lib, "..\\Debug\\WinCryptoPP.lib")
@@ -18,15 +20,16 @@ char g_szPrivKey[] = "30820275020100300D06092A864886F70D01010105000482025F308202
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-// 	HashHelper helper;
+	//HASH计算测试
 // 	std::string filePath = "C:\\Users\\hkxiaoyu118\\AppData\\Local\\Discord\\Update.exe";
-// 	std::string result1=helper.CalMD5FromFile((char *)filePath.c_str());
+// 	std::string result1=CalMD5ByFile((char *)filePath.c_str());
 // 	printf("MD5:%s\n", result1.c_str());
-// 	std::string result2 = helper.CalSha1FromFile((char *)filePath.c_str());
-// 	printf("MD5:%s\n", result2.c_str());
-// 	std::string result3 = helper.CalSha256FromFile((char *)filePath.c_str());
-// 	printf("MD5:%s\n", result3.c_str());
+// 	std::string result2 = CalSha1ByFile((char *)filePath.c_str());
+// 	printf("SHA1:%s\n", result2.c_str());
+// 	std::string result3 = CalSha256ByFile((char *)filePath.c_str());
+// 	printf("SHA256:%s\n", result3.c_str());
 
+	//AES对称加密测试
 // 	AesHelper helper;
 // 	std::string text = "哈哈哈哈，孙肥肥xxxxx";
 // 	std::string key = "qwertyuioplkjhgf";
@@ -35,36 +38,51 @@ int _tmain(int argc, _TCHAR* argv[])
 // 	std::cout << result2 << std::endl;
 
 
-	char szPrivateFile[] = "privatefile";
-	char szPublicFile[] = "publicfile";
-	char szSeed[] = "DemonGanDemonGansdjlkfjsdlk";
-
-	char szOriginalString[] = "I am DemonGan";
-
-	/* 密钥在文件方式 */
-	// 生成RSA公私密钥对
-	GenerateRSAKey(1024, szPrivateFile, szPublicFile, (BYTE*)szSeed, ::lstrlen(szSeed));
-	// RSA公钥加密字符串
-	string strEncryptString = RSAEncryptByFile(szOriginalString, szPublicFile, (BYTE*)szSeed, ::lstrlen(szSeed));
-	// RSA私钥解密字符串
-	string strDecryptString = RSADecryptByFile((char*)strEncryptString.c_str(), szPrivateFile);
-	// 显示
-	printf("原文字符串:\n[%d]%s\n", ::lstrlen(szOriginalString), szOriginalString);
-	printf("密文字符串:\n[%d]%s\n", strEncryptString.length(), strEncryptString.c_str());
-	printf("解密明文字符串:\n[%d]%s\n", strDecryptString.length(), strDecryptString.c_str());
-
-	printf("\n\n");
-
-
-// 	/* 密钥在内存方式 */
+	//RSA测试
+// 	char szPrivateFile[] = "privatefile";
+// 	char szPublicFile[] = "publicfile";
+// 	char szSeed[] = "DemonGanDemonGansdjlkfjsdlk";
+// 
+// 	char szOriginalString[] = "I am DemonGan";
+// 
+// 	/* 密钥在文件方式 */
+// 	// 生成RSA公私密钥对
+// 	GenerateRSAKey(1024, szPrivateFile, szPublicFile, (BYTE*)szSeed, ::lstrlen(szSeed));
 // 	// RSA公钥加密字符串
-// 	string strEncryptString_Mem = RSAEncryptByMem(szOriginalString, g_szPubKey, (BYTE*)szSeed, ::lstrlen(szSeed));
+// 	string strEncryptString = RSAEncryptByFile(szOriginalString, szPublicFile, (BYTE*)szSeed, ::lstrlen(szSeed));
 // 	// RSA私钥解密字符串
-// 	string strDecryptString_Mem = RSADecryptByMem((char*)strEncryptString_Mem.c_str(), g_szPrivKey);
+// 	string strDecryptString = RSADecryptByFile((char*)strEncryptString.c_str(), szPrivateFile);
 // 	// 显示
 // 	printf("原文字符串:\n[%d]%s\n", ::lstrlen(szOriginalString), szOriginalString);
-// 	printf("密文字符串:\n[%d]%s\n", strEncryptString_Mem.length(), strEncryptString_Mem.c_str());
-// 	printf("解密明文字符串:\n[%d]%s\n", strDecryptString_Mem.length(), strDecryptString_Mem.c_str());
+// 	printf("密文字符串:\n[%d]%s\n", strEncryptString.length(), strEncryptString.c_str());
+// 	printf("解密明文字符串:\n[%d]%s\n", strDecryptString.length(), strDecryptString.c_str());
+// 
+// 	printf("\n\n");
+// 
+// 
+//  	/* 密钥在内存方式 */
+//  	// RSA公钥加密字符串
+//  	string strEncryptString_Mem = RSAEncryptByMem(szOriginalString, g_szPubKey, (BYTE*)szSeed, ::lstrlen(szSeed));
+//  	// RSA私钥解密字符串
+//  	string strDecryptString_Mem = RSADecryptByMem((char*)strEncryptString_Mem.c_str(), g_szPrivKey);
+//  	// 显示
+//  	printf("原文字符串:\n[%d]%s\n", ::lstrlen(szOriginalString), szOriginalString);
+//  	printf("密文字符串:\n[%d]%s\n", strEncryptString_Mem.length(), strEncryptString_Mem.c_str());
+//  	printf("解密明文字符串:\n[%d]%s\n", strDecryptString_Mem.length(), strDecryptString_Mem.c_str());
+
+	while (true)
+	{
+		std::string errorString;
+		std::string str = "深刻搭街坊立刻就撒大了房间阿里山扩大就伺机待发卢卡斯京东方了静安寺零九分卢卡斯的积分了教师劳动纠纷了撒旦解放了看就";
+		std::string key = "wertyuioplkjhgfd";
+		std::string iv = "1111111111111111";
+		AesEcbHelper helper(key);
+		std::string result1 = helper.EncryptData(str, errorString);
+		std::cout << result1 << std::endl;
+		//result1 = "wertyuioplkjhgfd";
+		std::string result2 = helper.DecryptData(result1, errorString);
+		std::cout << result2 << std::endl;
+	}
 
 	system("pause");
 	return 0;
