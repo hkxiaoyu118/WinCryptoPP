@@ -7,6 +7,9 @@
 #include "../WinCryptoPP/AES/AesHelper.h"
 #include "../WinCryptoPP/AES/AesEcbHelper.h"
 #include "../WinCryptoPP/AES/AesCbcHelper.h"
+#include "../WinCryptoPP/AES/AesCbcCtsHelper.h"
+#include "../WinCryptoPP/AES/AesCfbHelper.h"
+#include "../WinCryptoPP/AES/AesCtrHelper.h"
 /*#include "../WinCryptoPP/RSA/RSAHelper.h"*/
 
 #pragma comment(lib, "..\\WinCryptoPP\\Libs\\lib\\Debug\\cryptlib.lib")
@@ -76,7 +79,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::string str = "深刻搭街坊立刻就撒大了房间阿里山扩大就伺机待发卢卡斯京东方了静安寺零九分卢卡斯的积分了教师劳动纠纷了撒旦解放了看就";
 		std::string key = "wertyuioplkjhgfd";
 		std::string iv = "1111111111111111";
-		AesEcbHelper helper(key);
+		AesCtrHelper helper(key, iv);
 		std::string result1 = helper.EncryptData(str, errorString);
 		std::cout << result1 << std::endl;
 		//result1 = "wertyuioplkjhgfd";

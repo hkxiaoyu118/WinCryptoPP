@@ -48,6 +48,15 @@
     <ClInclude Include="AES\AesCbcHelper.h">
       <Filter>AES</Filter>
     </ClInclude>
+    <ClInclude Include="AES\AesCbcCtsHelper.h">
+      <Filter>AES</Filter>
+    </ClInclude>
+    <ClInclude Include="AES\AesCfbHelper.h">
+      <Filter>AES</Filter>
+    </ClInclude>
+    <ClInclude Include="AES\AesCtrHelper.h">
+      <Filter>AES</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -66,6 +75,15 @@
       <Filter>RSA</Filter>
     </ClCompile>
     <ClCompile Include="AES\AesCbcHelper.cpp">
+      <Filter>AES</Filter>
+    </ClCompile>
+    <ClCompile Include="AES\AesCbcCtsHelper.cpp">
+      <Filter>AES</Filter>
+    </ClCompile>
+    <ClCompile Include="AES\AesCfbHelper.cpp">
+      <Filter>AES</Filter>
+    </ClCompile>
+    <ClCompile Include="AES\AesCtrHelper.cpp">
       <Filter>AES</Filter>
     </ClCompile>
   </ItemGroup>

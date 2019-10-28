@@ -19,9 +19,9 @@ std::string AesCbcHelper::EncryptData(std::string data, std::string& errorString
 
 	try
 	{
-		StreamTransformationFilter cbcEncryptor(m_encryption, new HexEncoder(new StringSink(cryptResult)));
-		cbcEncryptor.Put((byte*)data.c_str(), data.length());
-		cbcEncryptor.MessageEnd();
+		StreamTransformationFilter encryptor(m_encryption, new HexEncoder(new StringSink(cryptResult)));
+		encryptor.Put((byte*)data.c_str(), data.length());
+		encryptor.MessageEnd();
 	}
 	catch (const CryptoPP::Exception & e)
 	{

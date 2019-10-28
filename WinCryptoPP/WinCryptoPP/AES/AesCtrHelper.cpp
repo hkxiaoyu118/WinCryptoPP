@@ -1,18 +1,20 @@
-#include "AesEcbHelper.h"
+#include "AesCtrHelper.h"
 
-AesEcbHelper::AesEcbHelper(std::string key)
+
+AesCtrHelper::AesCtrHelper(std::string key, std::string iv)
 {
-	m_encryption.SetKey((byte*)key.c_str(), key.length());
-	m_decryption.SetKey((byte*)key.c_str(), key.length());
+	m_encryption.SetKeyWithIV((byte*)key.c_str(), key.length(), (byte*)iv.c_str());
+	m_decryption.SetKeyWithIV((byte*)key.c_str(), key.length(), (byte*)iv.c_str());
 }
 
 
-AesEcbHelper::~AesEcbHelper()
+AesCtrHelper::~AesCtrHelper()
 {
+
 }
 
 
-std::string AesEcbHelper::EncryptData(std::string data, std::string& errorString)
+std::string AesCtrHelper::EncryptData(std::string data, std::string& errorString)
 {
 	std::string cryptResult;
 
@@ -34,7 +36,7 @@ std::string AesEcbHelper::EncryptData(std::string data, std::string& errorString
 }
 
 
-std::string AesEcbHelper::DecryptData(std::string cryptedData, std::string& errorString)
+std::string AesCtrHelper::DecryptData(std::string cryptedData, std::string& errorString)
 {
 	std::string originalData;
 
@@ -44,7 +46,7 @@ std::string AesEcbHelper::DecryptData(std::string cryptedData, std::string& erro
 		decryptor.Put((byte*)cryptedData.c_str(), cryptedData.length());
 		decryptor.MessageEnd();
 	}
-	catch (const CryptoPP::Exception& e)
+	catch (const CryptoPP::Exception & e)
 	{
 #if _DEBUG
 		std::cerr << e.what() << std::endl;
@@ -54,3 +56,4 @@ std::string AesEcbHelper::DecryptData(std::string cryptedData, std::string& erro
 
 	return originalData;
 }
+

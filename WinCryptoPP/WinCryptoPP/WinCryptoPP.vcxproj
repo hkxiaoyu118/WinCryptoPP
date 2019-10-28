@@ -76,7 +76,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AES\AesCbcCtsHelper.h" />
     <ClInclude Include="AES\AesCbcHelper.h" />
+    <ClInclude Include="AES\AesCfbHelper.h" />
+    <ClInclude Include="AES\AesCtrHelper.h" />
     <ClInclude Include="AES\AesEcbHelper.h" />
     <ClInclude Include="AES\AesHelper.h" />
     <ClInclude Include="Hash\HashHelper.h" />
@@ -85,7 +88,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AES\AesCbcCtsHelper.cpp" />
     <ClCompile Include="AES\AesCbcHelper.cpp" />
+    <ClCompile Include="AES\AesCfbHelper.cpp" />
+    <ClCompile Include="AES\AesCtrHelper.cpp" />
     <ClCompile Include="AES\AesEcbHelper.cpp" />
     <ClCompile Include="AES\AesHelper.cpp" />
     <ClCompile Include="Hash\HashHelper.cpp" />
