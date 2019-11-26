@@ -9,6 +9,7 @@ AesEcbHelper::AesEcbHelper(std::string key)
 
 AesEcbHelper::~AesEcbHelper()
 {
+
 }
 
 
